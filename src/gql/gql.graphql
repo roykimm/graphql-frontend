@@ -1,0 +1,47 @@
+mutation Register(
+  $email: String!
+  $password: String!
+  $confirmation: String!
+  $username: String!
+) {
+  register(
+    email: $email
+    password: $password
+    confirmation: $confirmation
+    username: $username
+  )
+}
+
+mutation ResendConfirmation($email: String!) {
+  resendConfirmation(email: $email)
+}
+
+mutation Confirm($email: String!) {
+  confirm(email: $email)
+}
+
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    ukey
+    access_token
+  }
+}
+
+mutation ForgotPassword($email: String!) {
+  forgotPassword(email: $email)
+}
+
+mutation ResetPassword($password: String!, $confirmation: String!) {
+  resetPassword(password: $password, confirmation: $confirmation)
+}
+
+mutation Logout {
+  logout
+}
+
+query Profile {
+  profile {
+    email
+    username
+  }
+}
