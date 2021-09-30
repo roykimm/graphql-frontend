@@ -39,6 +39,12 @@ mutation Logout {
   logout
 }
 
+mutation uploadFile($file : Upload!) {
+    uploadFile(file: $file){
+        url
+    }
+}
+
 query Profile {
   profile {
     email

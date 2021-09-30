@@ -11,6 +11,7 @@ import { Confirm } from './confirm';
 import { ResendConfirm} from './resend_confirm';
 import { ForgotPassword } from './forgot_password';
 import { ResetPassword } from './reset_password';
+import { FileUpload } from './upload';
 
 let initialized = false;
 export const Main: React.FC = () => {
@@ -77,6 +78,7 @@ export const Main: React.FC = () => {
           <Route exact path="/resend-confirm">{appState.loggedIn? <Redirect to="/" />: <ResendConfirm />}</Route>
           <Route exact path="/forgot-password">{appState.loggedIn? <Redirect to="/" />: <ForgotPassword />}</Route>
           <Route exact path="/reset-password/:token">{appState.loggedIn? <Redirect to="/" />: <ResetPassword />}</Route>
+          <Route exact path="/fileupload"><FileUpload /></Route>
           <Route component={NotFound} />
         </Switch>
       </div>
