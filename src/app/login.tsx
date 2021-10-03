@@ -1,3 +1,4 @@
+import { trace } from 'console';
 import React, { useState, useContext } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useLoginMutation } from '../gql/generated/graphql';
@@ -24,8 +25,9 @@ export const Login : React.FC = () => {
                     if(data === undefined || data?.login === undefined || data.login?.access_token === undefined){
                         throw new Error('Invalid credentials');
                     }
+                    console.log(data);
                     appSetLogin(data.login?.access_token!);
-                    history.replace('/');
+                    history.replace('/dashboard');
                 } catch(err) {
                     setShow(true);
                 }

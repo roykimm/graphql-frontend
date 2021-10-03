@@ -24,6 +24,8 @@ mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
     ukey
     access_token
+    email
+    username
   }
 }
 
@@ -39,10 +41,8 @@ mutation Logout {
   logout
 }
 
-mutation uploadFile($file : Upload!) {
-    uploadFile(file: $file){
-        url
-    }
+mutation uploadFile($file: Upload!) {
+  uploadFile(file: $file)
 }
 
 query Profile {

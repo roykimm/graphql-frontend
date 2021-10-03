@@ -8,10 +8,10 @@ export const FileUpload : React.FC = () => {
     const [ uploadFile ] = useUploadFileMutation();
 
     const handleFileChange = (e :any) => {
-        const file = e.target.files[0]
-        console.log(file)
+        const file = e.target.files[0];
         if(!file) return 
-        uploadFile({ variables : { file }})
+        console.log(file)
+        uploadFile({ variables : { file : file }})
     }
 
     return (

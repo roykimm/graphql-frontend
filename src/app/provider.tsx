@@ -6,20 +6,30 @@ import JwtDecode from 'jwt-decode';
 
 let authToken = '';
 const initial = {
-  appState: { loggedIn: false },
+  appState: { loggedIn: false , alert : false, alertMsg : ''},
   gqlError: { msg: '' },
   appSetLogin: (token: string) => { },
   appSetLogout: () => { },
   appSetAuthToken: (token: string) => { },
   appClearAuthToken: () => { },
+  appSetAlert : (alert: boolean) => { },
+  appSetAlertMsg : (alertMsg: string) => { },
 }
 
 export const AppStateContext = createContext(initial);
 
 function AppStateProvider({ children }: { children: ReactNode }) {
   // app state
-  const [appState, setAppState] = useState({ loggedIn: false });
+  const [appState, setAppState] = useState({ loggedIn: false , alert : false, alertMsg : ''});
   const [gqlError, setGQLError] = useState({ msg: '' });
+
+  const appSetAlert = (alert :boolean) => {
+    setAppState({...appState, alert : alert});
+  }
+
+  const appSetAlertMsg = (alertMsg :string) => {
+    setAppState({...appState, alertMsg : alertMsg});
+  }
 
   const appSetLogin = (token: string) => {
     authToken = token;
@@ -108,7 +118,9 @@ function AppStateProvider({ children }: { children: ReactNode }) {
       appSetLogin,
       appSetLogout,
       appSetAuthToken,
-      appClearAuthToken
+      appClearAuthToken,
+      appSetAlert,
+      appSetAlertMsg
     }}>
       <ApolloProvider client={client}>
         {children}

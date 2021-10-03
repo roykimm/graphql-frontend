@@ -12,6 +12,10 @@ import { ResendConfirm} from './resend_confirm';
 import { ForgotPassword } from './forgot_password';
 import { ResetPassword } from './reset_password';
 import { FileUpload } from './upload';
+import { Dashboard } from './components/dashboard';
+import { Memo } from './components/memo';
+import { Todo } from './components/todo';
+import { Modal } from './modal';
 
 let initialized = false;
 export const Main: React.FC = () => {
@@ -42,7 +46,7 @@ export const Main: React.FC = () => {
   return (
     <Router>
       <div>
-        <header>
+        {/* <header>
           {
             appState.loggedIn? 
               <div>
@@ -68,7 +72,8 @@ export const Main: React.FC = () => {
                 <div><Link to="/login">Login</Link></div>
               </div>
           }
-        </header>
+        </header> */}
+        <Modal/>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/register">{appState.loggedIn? <Redirect to="/" />: <Register />}</Route>
@@ -79,6 +84,9 @@ export const Main: React.FC = () => {
           <Route exact path="/forgot-password">{appState.loggedIn? <Redirect to="/" />: <ForgotPassword />}</Route>
           <Route exact path="/reset-password/:token">{appState.loggedIn? <Redirect to="/" />: <ResetPassword />}</Route>
           <Route exact path="/fileupload"><FileUpload /></Route>
+          <Route exact path="/dashboard"><Dashboard /></Route>
+          <Route exact path="/memo"><Memo /></Route>
+          <Route exact path="/todo"><Todo /></Route>
           <Route component={NotFound} />
         </Switch>
       </div>

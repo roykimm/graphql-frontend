@@ -18,12 +18,16 @@ export type Scalars = {
 export type AccessToken = {
   __typename?: 'AccessToken';
   access_token?: Maybe<Scalars['ID']>;
+  email?: Maybe<Scalars['String']>;
   ukey?: Maybe<Scalars['ID']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 export type File = {
   __typename?: 'File';
-  url: Scalars['String'];
+  encoding: Scalars['String'];
+  filename: Scalars['String'];
+  mimetype: Scalars['String'];
 };
 
 export type GalleryProfile = {
@@ -56,7 +60,7 @@ export type Mutation = {
   register?: Maybe<Scalars['Boolean']>;
   resendConfirmation?: Maybe<Scalars['Boolean']>;
   resetPassword?: Maybe<Scalars['Boolean']>;
-  uploadFile: File;
+  uploadFile?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -171,7 +175,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: Maybe<{ __typename?: 'AccessToken', ukey?: Maybe<string>, access_token?: Maybe<string> }> };
+export type LoginMutation = { __typename?: 'Mutation', login?: Maybe<{ __typename?: 'AccessToken', ukey?: Maybe<string>, access_token?: Maybe<string>, email?: Maybe<string>, username?: Maybe<string> }> };
 
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
@@ -198,7 +202,7 @@ export type UploadFileMutationVariables = Exact<{
 }>;
 
 
-export type UploadFileMutation = { __typename?: 'Mutation', uploadFile: { __typename?: 'File', url: string } };
+export type UploadFileMutation = { __typename?: 'Mutation', uploadFile?: Maybe<boolean> };
 
 export type ProfileQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -312,6 +316,8 @@ export const LoginDocument = gql`
   login(email: $email, password: $password) {
     ukey
     access_token
+    email
+    username
   }
 }
     `;
@@ -437,9 +443,7 @@ export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const UploadFileDocument = gql`
     mutation uploadFile($file: Upload!) {
-  uploadFile(file: $file) {
-    url
-  }
+  uploadFile(file: $file)
 }
     `;
 export type UploadFileMutationFn = Apollo.MutationFunction<UploadFileMutation, UploadFileMutationVariables>;
