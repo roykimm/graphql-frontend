@@ -9,7 +9,7 @@ import { Modal } from '../modal';
 
 export const Dashboard : React.FC = () => {
 
-    const { appState, gqlError , appSetAlert, appSetAlertMsg} = useContext(AppStateContext);
+    const { appState, gqlError , appSetAlert} = useContext(AppStateContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -19,19 +19,10 @@ export const Dashboard : React.FC = () => {
         }
     })
 
-    const modaltest = () => { 
-        console.log(appState.loggedIn)
-        appSetAlertMsg('this is test');
-        appSetAlert(true);
-    }
-
     return (
         <div>
-            <div className="px-5 mt-3">
-                <Header />
-                <Showmenu />
-            </div>
-            <button onClick={modaltest}className="bg-gray-100">메세지 띄우기</button>
+            <Header />
+            <Showmenu />
             <Footer />
         </div>
     )   

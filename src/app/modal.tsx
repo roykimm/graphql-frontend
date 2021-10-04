@@ -5,11 +5,15 @@ import { CheckIcon } from '@heroicons/react/outline'
 
 export const Modal : React.FC = () => {
 
-    const [open, setOpen] = useState(false)
-    const { appState } = useContext(AppStateContext);
+    const [ open, setOpen ] = useState(false);
+    const [ msg, setMsg ] = useState('');
+    const { appState , appSetAlert } = useContext(AppStateContext);
 
     useEffect(() => {
-        console.log("useEffect")
+        console.log("useEffect");
+        console.log("loggedIn : " + appState.loggedIn)
+        console.log("dfdd : " + appState.alertMsg)
+        setMsg(appState.alertMsg);
         setOpen(appState.alert)
     }) 
 
@@ -49,22 +53,17 @@ export const Modal : React.FC = () => {
                         </div>
                         <div className="mt-3 text-center sm:mt-5">
                         <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                            Payment successful
+                            {appState.alertMsg}
                         </Dialog.Title>
-                        <div className="mt-2">
-                            <p className="text-sm text-gray-500">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.
-                            </p>
-                        </div>
                         </div>
                     </div>
                     <div className="mt-5 sm:mt-6">
                         <button
                         type="button"
                         className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                        onClick={() => setOpen(false)}
+                        onClick={() => appSetAlert({alert : false, alertMsg : ''})}
                         >
-                        Go back to dashboard
+                        닫기
                         </button>
                     </div>
                     </div>

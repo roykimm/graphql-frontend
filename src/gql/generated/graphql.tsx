@@ -155,6 +155,16 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register?: Maybe<boolean> };
 
+export type MemoRegisterMutationVariables = Exact<{
+  email: Scalars['String'];
+  username: Scalars['String'];
+  title: Scalars['String'];
+  content: Scalars['String'];
+}>;
+
+
+export type MemoRegisterMutation = { __typename?: 'Mutation', memoRegister?: Maybe<boolean> };
+
 export type ResendConfirmationMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -249,6 +259,45 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const MemoRegisterDocument = gql`
+    mutation memoRegister($email: String!, $username: String!, $title: String!, $content: String!) {
+  memoRegister(
+    email: $email
+    username: $username
+    title: $title
+    content: $content
+  )
+}
+    `;
+export type MemoRegisterMutationFn = Apollo.MutationFunction<MemoRegisterMutation, MemoRegisterMutationVariables>;
+
+/**
+ * __useMemoRegisterMutation__
+ *
+ * To run a mutation, you first call `useMemoRegisterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useMemoRegisterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [memoRegisterMutation, { data, loading, error }] = useMemoRegisterMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      username: // value for 'username'
+ *      title: // value for 'title'
+ *      content: // value for 'content'
+ *   },
+ * });
+ */
+export function useMemoRegisterMutation(baseOptions?: Apollo.MutationHookOptions<MemoRegisterMutation, MemoRegisterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<MemoRegisterMutation, MemoRegisterMutationVariables>(MemoRegisterDocument, options);
+      }
+export type MemoRegisterMutationHookResult = ReturnType<typeof useMemoRegisterMutation>;
+export type MemoRegisterMutationResult = Apollo.MutationResult<MemoRegisterMutation>;
+export type MemoRegisterMutationOptions = Apollo.BaseMutationOptions<MemoRegisterMutation, MemoRegisterMutationVariables>;
 export const ResendConfirmationDocument = gql`
     mutation ResendConfirmation($email: String!) {
   resendConfirmation(email: $email)

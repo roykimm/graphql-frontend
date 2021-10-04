@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Main }  from './app/main';
 import AppStateProvider from './app/provider';
+import ContextRoute from './app/contextroute';
 import "tailwindcss/tailwind.css"
 
 ReactDOM.render(

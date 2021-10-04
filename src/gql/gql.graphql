@@ -51,3 +51,17 @@ query Profile {
     username
   }
 }
+
+mutation memoRegister(
+  $email: String!
+  $username: String!
+  $title: String!
+  $content: String!
+) {
+  memoRegister(
+    email: $email
+    username: $username
+    title: $title
+    content: $content
+  )
+}

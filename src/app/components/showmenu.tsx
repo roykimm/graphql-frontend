@@ -1,8 +1,23 @@
-
+import React, { useContext } from 'react';
+import { AppStateContext, fetchAccessToken } from '../provider';
+import { useHistory } from 'react-router-dom';
 
 export const Showmenu : React.FC = () => {
+
+    const { appSetAlert } = useContext(AppStateContext);
+    const history = useHistory();
+
+    const openMessageBox = () => { 
+        const msg = "준비중입니다."
+        appSetAlert({alert : true, alertMsg : msg});
+    }
+
+    const moveMemo = () => {
+        history.replace('/memo');
+    }
+
     return (
-        <div className="mt-5">
+        <div className="mt-5 px-5">
             <h2 className="text-gray-500 text-lg font-bold uppercase tracking-wide">사용가능한 앱</h2>
             <div className="">
                 <ul role="list" className="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -16,11 +31,11 @@ export const Showmenu : React.FC = () => {
                         <p className="text-gray-500">필요한 정보를 메모앱으로 관리하세요.</p>
                         </div>
                         <div className="flex-shrink-0 pr-2">
-                        <a href="/memo" className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button onClick={moveMemo} className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        </a>
+                        </button>
                         </div>
                     </div>
                     </li>
@@ -34,11 +49,11 @@ export const Showmenu : React.FC = () => {
                         <p className="text-gray-500">할일을 관리하세요.</p>
                         </div>
                         <div className="flex-shrink-0 pr-2">
-                        <a href="/todo" className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button onClick={moveMemo} className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        </a>
+                        </button>
                         </div>
                     </div>
                     </li>
@@ -57,11 +72,11 @@ export const Showmenu : React.FC = () => {
                         <p className="text-gray-500">내사진을 관리하세요.</p>
                         </div>
                         <div className="flex-shrink-0 pr-2">
-                        <a href="/memo" className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button onClick={openMessageBox} className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        </a>
+                        </button>
                         </div>
                     </div>
                     </li>
@@ -75,11 +90,11 @@ export const Showmenu : React.FC = () => {
                         <p className="text-gray-500">연락처를 관리하세요.</p>
                         </div>
                         <div className="flex-shrink-0 pr-2">
-                        <a href="/memo" className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button onClick={openMessageBox} className="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        </a>
+                        </button>
                         </div>
                     </div>
                     </li>

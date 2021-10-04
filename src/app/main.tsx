@@ -4,6 +4,7 @@ import { AppStateContext, fetchAccessToken } from './provider';
 import { useLogoutMutation } from '../gql/generated/graphql';
 import { Home } from './home';
 import { Login } from './login';
+import { LoginNew } from './loginNew';
 import { Register } from './register';
 import { Profile } from './profile';
 import { NotFound } from './notfound';
@@ -30,7 +31,7 @@ export const Main: React.FC = () => {
     fetchAccessToken()
       .then((data:any) => {
         const failed = data === undefined || data?.access_token === undefined;
-        failed ? appSetLogout() : appSetLogin(data?.access_token!);
+        failed ? appSetLogout() : appSetLogin(data?.access_token!, '', '');
       })
       .catch((e) => {
         appSetLogout();
@@ -77,7 +78,7 @@ export const Main: React.FC = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/register">{appState.loggedIn? <Redirect to="/" />: <Register />}</Route>
-          <Route exact path="/login">{appState.loggedIn? <Redirect to="/" />: <Login />}</Route>
+          <Route exact path="/login">{appState.loggedIn? <Redirect to="/dashboard" />: <LoginNew />}</Route>
           <Route exact path="/confirm/:token">{appState.loggedIn? <Redirect to="/" />: <Confirm />}</Route>
           <Route exact path="/profile">{appState.loggedIn? <Profile />: <Redirect to="/login" />}</Route>
           <Route exact path="/resend-confirm">{appState.loggedIn? <Redirect to="/" />: <ResendConfirm />}</Route>

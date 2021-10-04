@@ -3,37 +3,34 @@ import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink, Obse
 import { onError } from '@apollo/link-error';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import JwtDecode from 'jwt-decode';
+import { trace } from "console";
 
 let authToken = '';
 const initial = {
-  appState: { loggedIn: false , alert : false, alertMsg : ''},
+  appState: { loggedIn: false , alert : false, alertMsg : '', email: "", username: ""},
   gqlError: { msg: '' },
-  appSetLogin: (token: string) => { },
+  appSetLogin: (token: string, email : string, username: string) => { },
   appSetLogout: () => { },
   appSetAuthToken: (token: string) => { },
   appClearAuthToken: () => { },
-  appSetAlert : (alert: boolean) => { },
-  appSetAlertMsg : (alertMsg: string) => { },
+  appSetAlert : ({alert,alertMsg} :{alert: boolean, alertMsg: string}) => { },
 }
 
 export const AppStateContext = createContext(initial);
 
 function AppStateProvider({ children }: { children: ReactNode }) {
   // app state
-  const [appState, setAppState] = useState({ loggedIn: false , alert : false, alertMsg : ''});
+  console.log("AppStateProvider")
+  const [appState, setAppState] = useState({ loggedIn: false , email: "", username: "", alert : false, alertMsg : ''});
   const [gqlError, setGQLError] = useState({ msg: '' });
 
-  const appSetAlert = (alert :boolean) => {
-    setAppState({...appState, alert : alert});
+  const appSetAlert = ({alert,alertMsg} :{alert: boolean, alertMsg: string} ) => {
+    setAppState({...appState, alert : alert, alertMsg : alertMsg});
   }
 
-  const appSetAlertMsg = (alertMsg :string) => {
-    setAppState({...appState, alertMsg : alertMsg});
-  }
-
-  const appSetLogin = (token: string) => {
+  const appSetLogin = (token: string, email: string, username : string) => {
     authToken = token;
-    setAppState({ ...appState, loggedIn: true });
+    setAppState({ ...appState, loggedIn: true , email : email, username: username});
   };
 
   const appSetLogout = () => {
@@ -120,7 +117,6 @@ function AppStateProvider({ children }: { children: ReactNode }) {
       appSetAuthToken,
       appClearAuthToken,
       appSetAlert,
-      appSetAlertMsg
     }}>
       <ApolloProvider client={client}>
         {children}

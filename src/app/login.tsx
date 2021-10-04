@@ -26,7 +26,7 @@ export const Login : React.FC = () => {
                         throw new Error('Invalid credentials');
                     }
                     console.log(data);
-                    appSetLogin(data.login?.access_token!);
+                    appSetLogin(data.login?.access_token!, data.login?.email! , data.login?.username!);
                     history.replace('/dashboard');
                 } catch(err) {
                     setShow(true);
